@@ -45,7 +45,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             
             let visRec = VisualRecognition(apiKey: apiKey, version: version)
             
-            let imageData = UIImageJPEGRepresentation(userImage, 0.01)
+            let imageData = UIImageJPEGRepresentation(userImage, 0.05)
             
             let docURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             
@@ -62,23 +62,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 SVProgressHUD.dismiss()
                 print(self.results)
                 DispatchQueue.main.async {
-                    
+
                     self.navigationItem.title = self.results.first!
                     self.cameraButton.isEnabled = true
                     self.shareButton.isHidden = false
                 }
-                
-                
-//                if self.results.contains("hotdog") {
-//                    DispatchQueue.main.async {
-//                        self.navigationItem.title = "Hot Dog!"
-//                    }
-//                } else {
-//                    DispatchQueue.main.async {
-//                        self.navigationItem.title = "NOT a Hotdog ;("
-//                    }
-//
-//                }
             })
             
         }else{
@@ -88,7 +76,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func cameraPressed(_ sender: UIBarButtonItem) {
         
-        imagePicker.sourceType = .savedPhotosAlbum
+        imagePicker.sourceType = .camera
         imagePicker.allowsEditing = false
         navigationItem.title = ""
         present(imagePicker, animated: true, completion: nil)
